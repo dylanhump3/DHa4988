@@ -1,0 +1,19 @@
+
+# Syntax Coloring Map For DHa4988-stepper-driver-library
+
+# Datatypes (KEYWORD1)
+
+DHa4988	KEYWORD1
+
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+
+setMode	KEYWORD2
+setDirection	KEYWORD2
+setSpeed	KEYWORD2
+step	KEYWORD2
+enable	KEYWORD2
+disable	KEYWORD2
+attachButton	KEYWORD2
+checkButtonPress	KEYWORD2
