@@ -1,4 +1,4 @@
-#include <DylanStepper.h>
+#include <DHa4988.h>
 
 // define our output pins
 const int enable = 2;
@@ -11,7 +11,7 @@ const int dir = 7;
 // define our button input
 const int button = 8;
 
-DylanStepper stepper(enable, dir, step, ms1, ms2, ms3);
+DHa4988 stepper(enable, dir, step, ms1, ms2, ms3);
 
 void setup() {
   // configure the stepper to be in half step mode
@@ -26,7 +26,8 @@ void setup() {
   // attach a button to turn the motor 180 degrees on each press
   // the button has an external pulldown resistor
   // when the button is pressed, the stepper will step upon release
-  stepper.attachButton(button, 180.0, D_FALLING, D_BUTTON_PULLDOWN);
+  // autodisable the motor when not in use
+  stepper.attachButton(button, 180.0, D_FALLING, D_BUTTON_PULLDOWN, true);
 }
 
 void loop() {

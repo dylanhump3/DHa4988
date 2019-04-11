@@ -1,4 +1,4 @@
-# DylanStepper
+# DHa4988
 
 A simple, customizable driver for the a4988 stepper motor board for Arduino.
 
@@ -14,7 +14,7 @@ const int step = 6;
 const int dir = 7;
 
 // initalize the stepper class
-DylanStepper stepper(enable, dir, step, ms1, ms2, ms3);
+DHa4988 stepper(enable, dir, step, ms1, ms2, ms3);
 
 void setup() {
   // change mode to Half step (0.9 degrees per step)
@@ -31,7 +31,7 @@ void loop() {
 
 ## Functions
 
-`void setMode(int mode)`
+`void setMode(uint8_t mode)`
 
 Specify the desired mode. Valid modes are:
 
@@ -45,7 +45,7 @@ Specify the desired mode. Valid modes are:
 
 ---
 
-`void setDirection(int direction)`
+`void setDirection(uint8_t direction)`
 
 Set the desired direction. Valid directions are:
 
@@ -56,7 +56,7 @@ Set the desired direction. Valid directions are:
 
 ---
 
-`void setSpeed(int speed)`
+`void setSpeed(uint8_t speed)`
 
 Set the desired speed. Speed is given in percentage of the maximum speed. Thus
 these values are between 0 and 100 inclusive. Max speed corresponds to 1667
@@ -103,7 +103,7 @@ the mode and direction of the motor.
 
 ---
 
-`void attachButton(int button, float degrees, int edge, int mode)`
+`void attachButton(uint8_t button, float degrees, uint8_t edge, uint8_t mode, bool autoDisable)`
 
 Attach a button such that upon its press and the specified edge and mode, the stepper
 will turn the specified degrees. Valid edges are `D_RISING` and `D_FALLING` which
@@ -111,7 +111,9 @@ specify the rising or falling edge of the button. Valid modes are `D_BUTTON_PULL
 and `D_BUTTON_PULLDOWN` which specify if a pullup or pulldown resistor are connected
 externally. Note that this function does not configure any internal pullup/down resistors.
 As with `step()`, the `degrees` must be a multiple of the current mode, or the button
-attach will be ignored.
+attach will be ignored. If `autoDisable` is set to true, then the motor will be disabled
+and automatically enable itself when a button press occurs. It will then disable itself
+until the next button press.
 
 Example use:
 ```
@@ -119,7 +121,8 @@ Example use:
 // We want to spin 180.0 on the rising edge of our button
 // Based on the pulldown configuration the button will be LOW unless pressed
 // The stepper will spin the instant the button is pressed as this is the rising edge
-stepper.attachButton(D8, 180.0, D_RISING, D_BUTTON_PULLDOWN);
+// Turn on auto disable
+stepper.attachButton(D8, 180.0, D_RISING, D_BUTTON_PULLDOWN, true);
 ```
 
 Note that this function has a 100ms delay for debouncing the button.
@@ -131,8 +134,6 @@ Note that this function has a 100ms delay for debouncing the button.
 This function must be called in a loop in order to check for the conditions
 specified in `attachButton()`. `attachButton()` must be called before this
 function is ever called.
-
-
 
 ## TODO
 

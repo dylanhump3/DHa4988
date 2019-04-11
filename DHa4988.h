@@ -2,9 +2,9 @@
 **  File name: DylanStepper.h
 **  Description: Driver for a4988 driver board
 **  Notes:
-**  Author(s): Humphrey, Dylan; Lapetina, Elyh
-**  Created: 3/26/2019
-**  Last Modified: 3/26/2019
+**  Author(s): Humphrey, Dylan
+**  Created: 4/11/2019
+**  Last Modified: 4/11/2019
 **  Changes:
 ******************************************************************************/
 
@@ -28,9 +28,9 @@
 #define D_BUTTON_PULLDOWN 0
 #define D_BUTTON_PULLUP 1
 
-class DylanStepper {
+class DHa4988 {
 public:
-  /** Create a DylanStepper instance
+  /** Create a DHa4988 instance
    *
    *  @param enable The pin which is connected to the enable input on the stepper driver
    *  @param dir The pin connected to the dir input on the stepper driver
@@ -42,7 +42,7 @@ public:
    * @note Initializes all specified pins to outputs. Defaults the mode to
    * FULL_STEP, direction to clockwise, enabled to true, and the speed to 50%.
    */
-  DylanStepper(int enable, int dir, int step, int ms1, int ms2, int ms3);
+  DHa4988(uint8_t enable, uint8_t dir, uint8_t step, uint8_t ms1, uint8_t ms2, uint8_t ms3);
 
 
   /** Set the step mode
@@ -52,19 +52,19 @@ public:
    *  @note This mode must be a valid mode which are specified in the defines
    *  above.
    */
-  void setMode(int mode);
+  void setMode(uint8_t mode);
 
   /** Set the direction
    *
    *  @param direction A valid direction to set (clockwise or counter clockwise)
    */
-  void setDirection(int direction);
+  void setDirection(uint8_t direction);
 
   /** Set the speed
    *
    *  @param speed The perecent speed to set. Must be between 0 and 100 inclusive
    */
-  void setSpeed(int speed);
+  void setSpeed(uint8_t speed);
 
   /** Step the motor in the set direction the set amount of degrees
    *
@@ -99,36 +99,38 @@ public:
    *  @param degrees The amount of degrees to turn on a button press
    *  @param edge The edge to actually do the steps on. Must be either D_RISING or D_FALLING.
    *  @param mode The pinmode for the button. Either D_BUTTON_PULLUP or D_BUTTON_PULLDOWN
+   *  @param autoDisable Disable the motor while waiting for button presses
    *
    *  @note Setting the pinmode does NOT configure internal pull ups or pull downs.
    *  Those must be added externally in hardware. The pinmode is only used to
    *  correctly detect rising and falling edges.
    */
-  void attachButton(int button, float degrees, int edge, int mode);
+  void attachButton(uint8_t button, float degrees, uint8_t edge, uint8_t mode, bool autoDisable);
 
   /** Checks for a button press based on the specified parameters in attachButton
    *
    *  @note attachButton must be called before this can be used. This function also
-   *  must be called repeatedly in a loop to detect button changes/
+   *  must be called repeatedly in a loop to detect button changes
    */
   void checkButtonPress();
 
 private:
   bool _enabled;
-  int _direction;
-  int _enable;
-  int _dir;
-  int _step;
-  int _ms1;
-  int _ms2;
-  int _ms3;
-  int _mode;
-  int _speed;
-  int _button;
+  bool _autodisable;
+  uint8_t _direction;
+  uint8_t _enable;
+  uint8_t _dir;
+  uint8_t _step;
+  uint8_t _ms1;
+  uint8_t _ms2;
+  uint8_t _ms3;
+  uint8_t _mode;
+  uint8_t _speed;
+  uint8_t _button;
   float _buttonStep;
-  int _buttonEdge;
-  int _buttonMode;
-  int _prevButtonState;
+  uint8_t _buttonEdge;
+  uint8_t _buttonMode;
+  uint8_t _prevButtonState;
 
   void _updateIO();
 };
