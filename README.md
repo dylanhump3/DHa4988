@@ -2,6 +2,8 @@
 
 A simple, customizable driver for the a4988 stepper motor board for Arduino.
 
+---
+
 ## Example
 ```
 const int enable = 2;
@@ -26,6 +28,8 @@ void loop() {
 }
 ```
 
+---
+
 ## Functions
 
 `void setMode(int mode)`
@@ -40,6 +44,8 @@ Specify the desired mode. Valid modes are:
 | EIGHTH_STEP    	| 0.225            	| NO      	|
 | SIXTEENTH_STEP 	| 0.1125           	| NO      	|
 
+---
+
 `void setDirection(int direction)`
 
 Set the desired direction. Valid directions are:
@@ -48,6 +54,8 @@ Set the desired direction. Valid directions are:
 | :-------------:	| :-------:	|
 | CW      	      | YES     	|
 | CCW      	      |  NO      	|
+
+---
 
 `void setSpeed(int speed)`
 
@@ -66,6 +74,8 @@ maximum speed.
 
 Note speeds will most likely be slower due to the time it takes for `digitalWrite`
 
+---
+
 `void step(float degrees)`
 
 Step the motor the specified amount of degrees.
@@ -77,16 +87,22 @@ want to step 2.0 degrees with HALF_STEP, it will only step 2 times for a total
 of 1.8 degrees. To step 2 degrees, you would could select EIGHTH_STEP which would
 step 9 times resulting in 2.025 degrees.
 
+---
+
 `void enable()`
 
 Enable the motor for use if it was previously disabled. No need to call this
 otherwise as it is enabled by default.
+
+---
 
 `void disable()`
 
 Disable the motor. This disables the outputs controlling the motor. The inputs
 and internal logic still remain operational so it is still possible to change
 the mode and direction of the motor.
+
+---
 
 `void attachButton(int button, float degrees, int edge, int mode)`
 
@@ -109,11 +125,15 @@ stepper.attachButton(D8, 180.0, D_RISING, D_BUTTON_PULLDOWN);
 
 Note that this function has a 100ms delay for debouncing the button.
 
+---
+
 `void checkButtonPress()`
 
 This function must be called in a loop in order to check for the conditions
 specified in `attachButton()`. `attachButton()` must be called before this
 function is ever called.
+
+---
 
 ## TODO
 
