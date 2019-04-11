@@ -2,7 +2,7 @@
 
 A simple, customizable driver for the a4988 stepper motor board for Arduino.
 
----
+
 
 ## Example
 ```
@@ -28,7 +28,6 @@ void loop() {
 }
 ```
 
----
 
 ## Functions
 
@@ -133,7 +132,7 @@ This function must be called in a loop in order to check for the conditions
 specified in `attachButton()`. `attachButton()` must be called before this
 function is ever called.
 
----
+
 
 ## TODO
 
