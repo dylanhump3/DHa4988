@@ -58,7 +58,7 @@ void DylanStepper::step(float degrees) {
     Serial.println("[Dylan Stepper] Inputted step degrees is not compabitible with current mode! Rounding to closest step...");
   }
 
-  int newSteps = (int)steps;
+  int newSteps = (int)round(steps);
   int delay = map(100 - _speed, 0, 100, 300, 4000);
 
   for (int i = 0; i < newSteps; i++) {

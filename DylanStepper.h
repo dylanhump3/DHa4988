@@ -72,7 +72,7 @@ public:
    *
    *  @note The degrees to step must be a multiple of the current mode. ie. if The
    *  current mode is HALF_STEP, degrees must be a multiple of 0.9. If not, then
-   *  the amount of steps will be floored down to the nearest integer. ie. If you
+   *  the amount of steps will be rounded to the nearest integer. ie. If you
    *  want to step 2.0 degrees with HALF_STEP, it will only step 2 times for a total
    *  of 1.8 degrees.
    */
